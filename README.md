@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Getting Started : next-js-social-media-app
 
 First, run the development server:
 
@@ -19,3 +19,7 @@ bun dev
 [`repo link`](https://github.com/wajahatfaryadali/next-js-social-media-app).
 
 Project to learn about full stack next js app using prisma and postgress.
+
+
+- using clerk for authentication 
+- tailwind css + shadcn ui
