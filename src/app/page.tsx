@@ -12,7 +12,8 @@ import {
 export default function Home() {
     return (
         <>
-            <div className="my-4">
+        body home page 
+            {/* <div className="my-4">
                 <ModeToggle />
             </div>
             <ClerkProvider>
@@ -41,7 +42,7 @@ export default function Home() {
                 <div className="">
                     <></>home page
                 </div>
-            </ClerkProvider>
+            </ClerkProvider> */}
         </>
     );
 }
