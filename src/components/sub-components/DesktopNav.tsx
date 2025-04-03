@@ -4,7 +4,12 @@ import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { BellIcon, HomeIcon, UserIcon } from "lucide-react";
-import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
+import {
+    SignInButton,
+    SignOutButton,
+    UserButton,
+    useUser,
+} from "@clerk/nextjs";
 
 const ThemeToggle = dynamic(() => import("../ui/ThemeToggle"), { ssr: false });
 
@@ -30,7 +35,7 @@ const DesktopNav = (props: Props) => {
                         </Link>
                     </Button>
                     <Button variant={"ghost"} asChild>
-                        <Link href={"/"}>
+                        <Link href={"/notifications"}>
                             <BellIcon className="h-4 w-4" />
                             <span className="hidden lg:inline">
                                 Notifications
@@ -38,12 +43,18 @@ const DesktopNav = (props: Props) => {
                         </Link>
                     </Button>
                     <Button variant={"ghost"} asChild>
-                        <Link href={"/"}>
+                        <Link href={"/profile"}>
                             <UserIcon className="h-4 w-4" />
                             <span className="hidden lg:inline">Profile</span>
                         </Link>
                     </Button>
-                    <SignOutButton />
+                    <div className="flex items-center justify-center">
+                        <UserButton />
+                    </div>
+
+                    <SignOutButton>
+                        <Button variant={"ghost"}>Sign out</Button>
+                    </SignOutButton>
                 </>
             ) : (
                 <>
