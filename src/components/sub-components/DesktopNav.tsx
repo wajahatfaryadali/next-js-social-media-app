@@ -4,28 +4,31 @@ import dynamic from "next/dynamic";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { BellIcon, HomeIcon, UserIcon } from "lucide-react";
-import { SignOutButton } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 
-const ModeToggle = dynamic(() => import("../ui/ModeToggle"), { ssr: false });
+const ThemeToggle = dynamic(() => import("../ui/ThemeToggle"), { ssr: false });
 
-
-type Props = {
-    user: any
-};
+type Props = {};
 
 const DesktopNav = (props: Props) => {
-    const { user } = props;
+    const currentUser = useUser();
+    console.log("chekcing currentuser *** ", currentUser);
+
+    console.log(
+        "currentUsercurrentUsercurrentUsercurrentUsercurrentUser *** ",
+        currentUser
+    );
     return (
         <div className="flex justify-end w-full gap-2">
-            <ModeToggle />
-            <Button variant={"ghost"} asChild>
-                <Link href={"/"}>
-                    <HomeIcon className="h-4 w-4" />
-                    <span className="hidden lg:inline">Home</span>
-                </Link>
-            </Button>
-            {user ? (
+            <ThemeToggle />
+            {currentUser.user ? (
                 <>
+                    <Button variant={"ghost"} asChild>
+                        <Link href={"/"}>
+                            <HomeIcon className="h-4 w-4" />
+                            <span className="hidden lg:inline">Home</span>
+                        </Link>
+                    </Button>
                     <Button variant={"ghost"} asChild>
                         <Link href={"/"}>
                             <BellIcon className="h-4 w-4" />
@@ -40,10 +43,19 @@ const DesktopNav = (props: Props) => {
                             <span className="hidden lg:inline">Profile</span>
                         </Link>
                     </Button>
+                    <SignOutButton />
                 </>
             ) : (
                 <>
-                    <SignOutButton />
+                    {!currentUser.isLoaded ? (
+                        <></>
+                    ) : (
+                        <SignInButton mode="modal">
+                            <Button variant={"ghost"} asChild>
+                                <Link href={"/"}>Sign In</Link>
+                            </Button>
+                        </SignInButton>
+                    )}
                 </>
             )}
         </div>

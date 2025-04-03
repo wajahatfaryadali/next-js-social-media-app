@@ -1,12 +1,10 @@
-
-import React from "react";
+import React, { use } from "react";
 import DesktopNav from "./sub-components/DesktopNav";
 import MobileNav from "./sub-components/MobileNav";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
 
 const Navbar = async () => {
-    const user = await currentUser();    
+
     return (
         <nav>
             <div className="sticky top-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filler]:bg-background/60 z-50">
@@ -22,10 +20,10 @@ const Navbar = async () => {
                         </div>
                         <div className="flex-1">
                             <div className="hidden lg:flex">
-                                <DesktopNav user={user} />
+                                <DesktopNav />
                             </div>
                             <div className="lg:hidden">
-                                <MobileNav user={user} />
+                                <MobileNav />
                             </div>
                         </div>
                     </div>

@@ -2,11 +2,12 @@
 import React from "react";
 
 type Props = {
-    user: any;
+    // user: any;
 };
 
 const MobileNav = (props: Props) => {
-    const { user } = props;
+    // const { user } = props;
+    let user = null;
     console.log("useruseruser ****", user);
 
     return <div>MobileNav</div>;

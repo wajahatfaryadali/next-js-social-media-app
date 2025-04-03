@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 
-function ModeToggle() {
+function ThemeToggle() {
     const { theme, setTheme } = useTheme();
 
     return (
@@ -26,4 +26,4 @@ function ModeToggle() {
     );
 }
 
-export default ModeToggle;
+export default ThemeToggle;
