@@ -52,9 +52,9 @@ const DesktopNav = (props: Props) => {
                         <UserButton />
                     </div>
 
-                    <SignOutButton>
+                    {/* <SignOutButton>
                         <Button variant={"ghost"}>Sign out</Button>
-                    </SignOutButton>
+                    </SignOutButton> */}
                 </>
             ) : (
                 <>
