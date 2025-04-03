@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const geistSans = localFont({
     src: "./fonts/GeistVF.woff",
@@ -32,21 +33,26 @@ export default function RootLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="system"
+                    defaultTheme="dark"
+                    storageKey="theme"
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <div className="min-h-screen">
-                        <Navbar />
-                        <main className="py-8 max-w-7xl mx-auto px-4">
-                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-                                <div className="hidden lg:block lg:col-span-3">
-                                    sidebar
+                    <ClerkProvider>
+                        <div className="min-h-screen">
+                            <Navbar />
+                            <main className="py-8 max-w-7xl mx-auto px-4">
+                                <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                                    <div className="hidden lg:block lg:col-span-3">
+                                        sidebar
+                                    </div>
+                                    <div className="lg:col-span-9">
+                                        {children}
+                                    </div>
                                 </div>
-                                <div className="lg:col-span-9">{children}</div>
-                            </div>
-                        </main>
-                    </div>
+                            </main>
+                        </div>
+                    </ClerkProvider>
                 </ThemeProvider>
             </body>
         </html>
