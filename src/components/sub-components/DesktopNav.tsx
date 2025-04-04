@@ -23,10 +23,11 @@ const DesktopNav = (props: Props) => {
         "currentUsercurrentUsercurrentUsercurrentUsercurrentUser *** ",
         currentUser
     );
+
     return (
         <div className="flex justify-end w-full gap-2">
             <ThemeToggle />
-            {currentUser.user ? (
+            {currentUser?.isLoaded && currentUser.user ? (
                 <>
                     <Button variant={"ghost"} asChild>
                         <Link href={"/"}>
@@ -58,13 +59,9 @@ const DesktopNav = (props: Props) => {
                 </>
             ) : (
                 <>
-                    {!currentUser.isLoaded ? (
-                        <></>
-                    ) : (
+                    {currentUser.isLoaded && (
                         <SignInButton mode="modal">
-                            <Button variant={"ghost"} asChild>
-                                <Link href={"/"}>Sign In</Link>
-                            </Button>
+                            <Button variant={"ghost"}>Sign In</Button>
                         </SignInButton>
                     )}
                 </>
