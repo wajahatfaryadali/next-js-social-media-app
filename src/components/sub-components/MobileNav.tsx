@@ -9,8 +9,7 @@ import {
     SheetTrigger,
 } from "@/components/ui/sheet";
 import { BellIcon, HomeIcon, Menu, UserIcon } from "lucide-react";
-// import ThemeToggle from "../ui/ThemeToggle";
-import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignInButton, useAuth, UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -22,16 +21,13 @@ type Props = {
 };
 
 const MobileNav = (props: Props) => {
-    const currentUser = useUser();
-    let user = null;
-
-    console.log("currentUsercurrentUser ", currentUser?.user);
+    const { isSignedIn } = useAuth();
 
     return (
         <div className="flex justify-end items-center gap-4">
             <ThemeToggle />
             <Sheet>
-                {currentUser.user && (
+                {isSignedIn && (
                     <>
                         <SheetTrigger className="flex justify-center">
                             <Menu />
@@ -41,7 +37,7 @@ const MobileNav = (props: Props) => {
                         </div>
                     </>
                 )}
-                {currentUser.isLoaded && !currentUser?.user ? (
+                {!isSignedIn ? (
                     <SignInButton mode="modal">
                         <Button variant={"link"} size={"sm"}>
                             Sign In
@@ -54,7 +50,7 @@ const MobileNav = (props: Props) => {
                     <SheetHeader>
                         <SheetTitle className="text-center">Menu</SheetTitle>
                         <SheetDescription className="flex flex-col gap-3 items-start">
-                            {currentUser.user ? (
+                            {isSignedIn ? (
                                 <>
                                     <Button variant={"ghost"} asChild>
                                         <Link href={"/"}>

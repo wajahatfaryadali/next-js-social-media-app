@@ -6,9 +6,8 @@ import Link from "next/link";
 import { BellIcon, HomeIcon, UserIcon } from "lucide-react";
 import {
     SignInButton,
-    SignOutButton,
+    useAuth,
     UserButton,
-    useUser,
 } from "@clerk/nextjs";
 
 const ThemeToggle = dynamic(() => import("../ui/ThemeToggle"), { ssr: false });
@@ -16,18 +15,12 @@ const ThemeToggle = dynamic(() => import("../ui/ThemeToggle"), { ssr: false });
 type Props = {};
 
 const DesktopNav = (props: Props) => {
-    const currentUser = useUser();
-    console.log("chekcing currentuser *** ", currentUser);
-
-    console.log(
-        "currentUsercurrentUsercurrentUsercurrentUsercurrentUser *** ",
-        currentUser
-    );
+    const { isSignedIn } = useAuth();
 
     return (
         <div className="flex justify-end w-full gap-2">
             <ThemeToggle />
-            {currentUser?.isLoaded && currentUser.user ? (
+            {isSignedIn ? (
                 <>
                     <Button variant={"ghost"} asChild>
                         <Link href={"/"}>
@@ -59,7 +52,7 @@ const DesktopNav = (props: Props) => {
                 </>
             ) : (
                 <>
-                    {currentUser.isLoaded && (
+                    {!isSignedIn && (
                         <SignInButton mode="modal">
                             <Button variant={"ghost"}>Sign In</Button>
                         </SignInButton>
