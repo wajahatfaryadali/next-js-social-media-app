@@ -2,8 +2,15 @@ import React, { use } from "react";
 import DesktopNav from "./sub-components/DesktopNav";
 import MobileNav from "./sub-components/MobileNav";
 import Link from "next/link";
+import { auth, currentUser } from "@clerk/nextjs/server";
+import { syncUser } from "@/actions/user.action";
 
 const Navbar = async () => {
+    const user = await currentUser();
+
+    if (user) {
+        await syncUser();
+    }
 
     return (
         <nav>
